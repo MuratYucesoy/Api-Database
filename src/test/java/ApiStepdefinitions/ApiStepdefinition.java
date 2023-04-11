@@ -39,6 +39,7 @@ public class ApiStepdefinition {
     Country_id countryId;
     Trendlife_Expected_Body expectedBody;
     JSONObject reqBody01;
+    Trendlife_Expected_Body expected_body;
 
     @Given("Istenilen {string} endpoint adrsine gidilir")
     public void istenilen_endpoint_adrsine_gidilir(String rawPaths) {
@@ -91,9 +92,10 @@ public class ApiStepdefinition {
         innerGet_country = new Trendlife_InnerGet_Country(231, "US", "United States", "1", "/flags/flag-of-United-States-of-America.jpg", 1, null, null);
         innerGet_state = new Trendlife_InnerGet_State(3953, "New Jersey", 231, 1, null, null);
         innerGet_city = new Trendlife_InnerGet_City(47790, "Asbury Park", 3953, 1, null, null);
-        addressesBody = new Trendlife_AddressesBody(20, 40, "asdfasdf", "234141234", "sadfas@asda.com", "22", "47790", "3953", "231", "23423", 0, 0, "2022-12-20T17:15:49.000000Z", "2022-12-21T04:59:45.000000Z", innerGet_country, innerGet_state,innerGet_city);
-        expectedBody=new Trendlife_Expected_Body(expectedBody.getAddresses(),"success");
-        System.out.println(expectedBody);
+        addressesBody = new Trendlife_AddressesBody( 20, 40, "asdfasdf", "234141234", "sadfas@asda.com", "22", "47790", "3953", "231", "23423", 0, 0, "2022-12-20T17:15:49.000000Z", "2022-12-21T04:59:45.000000Z", innerGet_country, innerGet_state,innerGet_city);
+        Trendlife_AddressesBody [] adres={addressesBody};
+        expectedBody=new Trendlife_Expected_Body(adres,"success");
+
     }
 
     @Then("US_onalti_TC_sifiriki icin response kaydedilir")
@@ -109,9 +111,9 @@ public class ApiStepdefinition {
 
     @Then("US_onalti_TC_sifiriki icin assertion islemi yapilir")
     public void us_onalti_tc_sifiriki_icin_assertion_islemi_yapilir() {
-      Trendlife_Expected_Body expected_body=response.as(Trendlife_Expected_Body.class);
-      Assert.assertEquals(expectedBody.getMessage(),expected_body.getMessage());
-
+        Trendlife_Expected_Body resBody=response.as(Trendlife_Expected_Body.class);
+        Assert.assertEquals(expectedBody.getMessage(),resBody.getMessage());
+        Assert.assertEquals(expectedBody.getAddresses(),resBody.getAddresses());
 
 
     }

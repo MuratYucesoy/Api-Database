@@ -1,11 +1,69 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="8.884">
-    <testcase classname="US01" name="api/register endpoint'ine gecerli datalardan olusan bir POST body gönderildiginde dönen status code'un 201" time="8.531">
+<testsuite errors="0" failures="1" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="7" time="22.69">
+    <testcase classname="US_16API" name="Verify status code and message information" time="7.87">
         <system-out>
-            <![CDATA[Given Istenilen "api,register" endpoint adrsine gidilir.....................passed
-Then US_sifir sifir_bir icin request body olusturulur.......................passed
-And US_sifir_bir sifir_bir icin response kaydeder...........................passed
-And Status Code 409 ve message "invalid Credintials" bilgileri assert edilir.passed
+            <![CDATA[Given Istenilen "api,profile,addressDetails" endpoint adrsine gidilir.......passed
+And US_onalti_TC_sifirbir icin request body olusturulur.....................passed
+Then Response kaydedilir....................................................passed
+Then Status Code 200 ve message "success" bilgileri assert edilir...........passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="API_US36_TC02" name="Adres bilgileri dogrulanmali" time="1.322">
+        <failure message="" type="java.lang.NullPointerException">
+            <![CDATA[Given Istenilen "api,profile,addressDetails" endpoint adrsine gidilir.......passed
+Then US_onalti_TC_sifiriki icin request body olusturulur....................passed
+Then US_onalti_TC_sifiriki icin expected body olustur.......................failed
+Then US_onalti_TC_sifiriki icin response kaydedilir.........................skipped
+And US_onalti_TC_sifiriki icin assertion islemi yapilir.....................skipped
+
+StackTrace:
+java.lang.NullPointerException
+	at ApiStepdefinitions.ApiStepdefinition.us_onalti_tc_sifirikiIcinExpectedBodyOlustur(ApiStepdefinition.java:95)
+	at ✽.US_onalti_TC_sifiriki icin expected body olustur(file:///C:/Users/murat/OneDrive/Desktop/Jdbc_Session/src/test/Resources/API_feature/US16_TC02.feature:9)
+]]>
+        </failure>
+    </testcase>
+    <testcase classname="API AddressDetails Get Request" name="Status kodu ve mesaj bilgisi dogrulama" time="2.622">
+        <system-out>
+            <![CDATA[Given Istenilen "api,profile,addressDetails" endpoint adrsine gidilir.......passed
+Then US_onalti_TC_sifiruc icin request body olusturur.......................passed
+Then US_onalti_TC_sifiruc icin response kaydeder............................passed
+Then Status Code 404 ve message "address not found" bilgileri assert edilir.passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="API AllCountries Get Request" name="Status kodu ve mesaj bilgisi dogrulama" time="2.698">
+        <system-out>
+            <![CDATA[Given Istenilen "api,profile,allCountries" endpoint adrsine gidilir.........passed
+Then US_onalti_TC_sifirdort icin response kaydeder..........................passed
+And Status Code 200 ve message "success" bilgileri assert edilir............passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="API AllCountries Get Request" name="Id Verileri Dogrulanir" time="2.672">
+        <system-out>
+            <![CDATA[Given Istenilen "api,profile,allCountries" endpoint adrsine gidilir.........passed
+Then US_onalti_TC_sifirbes icin response kaydeder...........................passed
+And US_onlati TC_sifirbes id, code "TR" ve icin name "Turkey" Assertion yapar.passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="Api" name="Status code message bilgisi" time="2.594">
+        <system-out>
+            <![CDATA[Given Istenilen "api,profile,countryStates" endpoint adrsine gidilir........passed
+Then US_onalti_TC_sifiralti icin request body olusturulur...................passed
+And US_onalti_TC_sifiralti icin response kaydeder...........................passed
+And Status Code 200 ve message "success" bilgileri assert edilir............passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="Api" name="Status code message bilgisi" time="2.53">
+        <system-out>
+            <![CDATA[Given Istenilen "api,profile,stateCities" endpoint adrsine gidilir..........passed
+Then US_onalti_TC_sifirsekiz icin request body olusturulur..................passed
+And US_onalti_TC_sifirsekiz icin response kaydeder..........................passed
+And Status Code 200 ve message "success" bilgileri assert edilir............passed
 ]]>
         </system-out>
     </testcase>

@@ -1,6 +1,6 @@
 #/api/profile/addressDetails endpoint'ine gecerli authorization bilgileri ve address id iceren bir
 # GET request body  gönderildiginde dönen response body icindeki addresses verileri dogrulanmali.
-@TC02
+
   Feature: API_US36_TC02
     Scenario: Adres bilgileri dogrulanmali
 

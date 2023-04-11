@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="8.884">
+    <testcase classname="US01" name="api/register endpoint'ine gecerli datalardan olusan bir POST body gönderildiginde dönen status code'un 201" time="8.531">
+        <system-out>
+            <![CDATA[Given Istenilen "api,register" endpoint adrsine gidilir.....................passed
+Then US_sifir sifir_bir icin request body olusturulur.......................passed
+And US_sifir_bir sifir_bir icin response kaydeder...........................passed
+And Status Code 409 ve message "invalid Credintials" bilgileri assert edilir.passed
+]]>
+        </system-out>
+    </testcase>
+</testsuite>

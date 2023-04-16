@@ -7,6 +7,6 @@
 
       Given Istenilen "api,profile,allCountries" endpoint adrsine gidilir
       Then  US_onalti_TC_sifirbes icin response kaydeder
-      And   US_onlati TC_sifirbes id, code "TR" ve icin name "Turkey" Assertion yapar
+      And   US_onlati TC_sifirbes icin id 223, code "TR" ve name "Turkey" Assertion yapar
 
 

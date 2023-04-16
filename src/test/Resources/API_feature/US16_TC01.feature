@@ -8,3 +8,4 @@
       And   US_onalti_TC_sifirbir icin request body olusturulur
       Then  Response kaydedilir
       Then  Status Code 200 ve message "success" bilgileri assert edilir
+

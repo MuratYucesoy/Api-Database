@@ -2,7 +2,7 @@
 # GET request body  gönderildiginde dönen dönen status code'in 404 ve message bilgisinin
 # "address not found" oldugu dogrulanmali.
 @US16
-  Feature: API AddressDetails Get Request
+  Feature: API AddressDetails Get Request Status kodu ve mesaj bilgisi dogrulama
     Scenario: Status kodu ve mesaj bilgisi dogrulama
 
       Given Istenilen "api,profile,addressDetails" endpoint adrsine gidilir

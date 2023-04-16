@@ -7,6 +7,3 @@ Feature: Api Status code message bilgisi
     Then  US_onalti_TC_sifiralti icin request body olusturulur
     And   US_onalti_TC_sifiralti icin response kaydeder
     And   Status Code 200 ve message "success" bilgileri assert edilir
-    #/api/profile/countryStates endpointine gecerli authorization bilgileri ve country_id olarak 223  girilip Get
-    # request body icerisinde gönderilince dönen response body'de id numarasi 3669 olan state'in "name" bilgisinin
-    # Ankara" oldugunu dogrulanmali

@@ -39,13 +39,6 @@ public class APIUtils {
         String email = ConfigReader.getProperty("email");
         String password = ConfigReader.getProperty("password");
 
-        /*
-        {
-             "email": "admin@gmail.com",
-              "password": "123123123"
-        }
-         */
-
         JSONObject reqBody = new JSONObject();
 
         reqBody.put("email",email);

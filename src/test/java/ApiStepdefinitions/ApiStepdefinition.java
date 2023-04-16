@@ -40,6 +40,7 @@ public class ApiStepdefinition {
     Trendlife_Expected_Body expectedBody;
     JSONObject reqBody01;
     Trendlife_Expected_Body expected_body;
+    US01_TC01 requestBody01;
 
     @Given("Istenilen {string} endpoint adrsine gidilir")
     public void istenilen_endpoint_adrsine_gidilir(String rawPaths) {
@@ -216,11 +217,10 @@ public class ApiStepdefinition {
     @And("Asserttion yapar")
     public void asserttionYapar() {
 
-        RestAssured.baseURI = "https://restapi.demoqa.com/utilities/books/getallbooks";
-        RequestSpecification request = RestAssured.given();
-
-        Response response = request.get();
-        System.out.println("Response Body -> " + response.body().asString());
+        //RestAssured.baseURI = "https://restapi.demoqa.com/utilities/books/getallbooks";
+        //RequestSpecification request = RestAssured.given();
+        //Response response = request.get();
+        //System.out.println("Response Body -> " + response.body().asString());
         //https://trendlifebuy.comapi/profile/countryStates
     }
 
@@ -241,41 +241,33 @@ public class ApiStepdefinition {
         Assert.assertEquals(jsonPath.get("addresses[222].name"),name);
     }
 
-    @And("US_onlati TC_sifirbes id, code {string} ve icin name {string} Assertion yapar")
-    public void us_onlatiTC_sifirbesIdCodeVeIcinNameAssertionYapar(String code, String name) {
+    @And("US_onlati TC_sifirbes icin id {int}, code {string} ve name {string} Assertion yapar")
+    public void us_onlatiTC_sifirbesIcinIdCodeVeNameAssertionYapar(int id, String code, String name) {
         JsonPath jsonPath=response.jsonPath();
-        Assert.assertEquals(jsonPath.get("addresses[222].code"),code);
-        Assert.assertEquals(jsonPath.get("addresses[222].name"),name);
+        Assert.assertEquals(jsonPath.get("addresses["+(id-1)+"].code"),code);
+        Assert.assertEquals(jsonPath.get("addresses["+(id-1)+"].name"),name);
     }
+
 
     @Then("US_sifir sifir_bir icin request body olusturulur")
     public void us_sifirSifir_birIcinRequestBodyOlusturulur() {
-        /*
-        {
-  "first_name": "abc",
-  "last_name": "bcd",
-  "username":"efg",
-  "email": "jjksjd@gmail.com",
-  "password": "As.23123123",
-  "password_confirmation": "As.23123123",
-  "user_type": "customer",
-  "phone":"12112312233",
-  "referral_code": "4454653445464546"
-}
-         */
+
+
         Faker faker=new Faker();
         String password=faker.internet().password();
-        reqBody01=new JSONObject();
+        requestBody01=new US01_TC01(faker.name().firstName(),faker.name().lastName(),faker.name().username(),faker.internet().emailAddress(),password,password,faker.team().name(),faker.phoneNumber().cellPhone(),faker.code().asin());
+        System.out.println(requestBody01);
+        //reqBody01=new JSONObject();
 
-        reqBody01.put("first_name",faker.name().firstName());
-        reqBody01.put("last_name",faker.name().lastName());
-        reqBody01.put("username",faker.name().username());
-        reqBody01.put("email",faker.internet().emailAddress());
-        reqBody01.put("password",password);
-        reqBody01.put("password_confirmation",password);
-        reqBody01.put("user_type",faker.team().name());
-        reqBody01.put("phone",faker.phoneNumber().cellPhone());
-        reqBody01.put("referral_code",faker.code().asin());
+        //reqBody01.put("first_name",faker.name().firstName());
+        //reqBody01.put("last_name",faker.name().lastName());
+        //reqBody01.put("username",faker.name().username());
+        //reqBody01.put("email",faker.internet().emailAddress());
+        //reqBody01.put("password",password);
+        //reqBody01.put("password_confirmation",password);
+        //reqBody01.put("user_type",faker.team().name());
+        //reqBody01.put("phone",faker.phoneNumber().cellPhone());
+        //reqBody01.put("referral_code",faker.code().asin());
 
 
 
@@ -286,12 +278,53 @@ public class ApiStepdefinition {
         response = given()
                 .headers("Authorization", "Bearer " + HooksAPI.token)
                 .contentType(ContentType.JSON)
-                //.accept(ContentType.JSON)
+                .accept(ContentType.JSON)
                 .spec(HooksAPI.spec)
-                .when().body(reqBody01.toString())
+                .when().body(requestBody01)
                 .post(fullPath);
         response.prettyPrint();
     }
+
+    @Then("Us_sifirIki_TC_sifirBir icin response'i kaydeder")
+    public void us_sifir_iki_tc_sifir_bir_icin_response_i_kaydeder() {
+        response=given()
+                .headers("Authorization", "Bearer " + HooksAPI.token)
+                .contentType(ContentType.JSON)
+                .spec(HooksAPI.spec)
+                .when()
+                .get(fullPath);
+        response.prettyPrint();
+    }
+
+    @And("US_sifirIki_TC_sifir icin body icerisindeki bilgileri assert eder")
+    public void us_sifiriki_tc_sifirIcinBodyIcerisindekiBilgileriAssertEder() {
+        JsonPath jsonPath=response.jsonPath();
+        Object actualId=1;
+        Assert.assertEquals(actualId,jsonPath.get("user[0].id"));
+        Assert.assertEquals("Super",jsonPath.get("user[0].first_name"));
+    }
+
+    @Given("User information check")
+    public void userInformationCheck() {
+        String url="https://trendlifebuy.com/api/get-users";
+        JSONObject jsonObject=new JSONObject();
+        jsonObject.put("id","812");
+
+        response=given()
+                .headers("Authorization","Bearer "+HooksAPI.token)
+                .contentType(ContentType.JSON)
+                .when()
+                .body(jsonObject)
+                .get(url);
+        response.prettyPrint();
+
+
+        response.then()
+                .assertThat()
+                .statusCode(200)
+                .body("message",Matchers.equalTo("success"));
+    }
+
 }
 
 

@@ -6,4 +6,4 @@ Feature: US01
     Given Istenilen "api,register" endpoint adrsine gidilir
     Then  US_sifir sifir_bir icin request body olusturulur
     And   US_sifir_bir sifir_bir icin response kaydeder
-    And   Status Code 409 ve message "invalid Credintials" bilgileri assert edilir
+    And   Status Code 201 ve message "Successfully registered" bilgileri assert edilir
